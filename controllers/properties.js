@@ -63,19 +63,24 @@ const getPropertiesNearBy = async (req, res) => {
   try {
     const { lng, lat, distance } = req.query;
 
-    const properties = await Property.find({
-      location: {
-        $near: {
-          $geometry: {
-            type: "Point",
-            coordinates: [parseFloat(lng), parseFloat(lat)]
-          },
-          $maxDistance: parseInt(distance)
+    if (!lng || !lat || !distance) {
+      const properties = await Property.find({});
+      res.json(properties);
+    } else {
+      const nearbyProperties = await Property.find({
+        location: {
+          $near: {
+            $geometry: {
+              type: "Point",
+              coordinates: [parseFloat(lng), parseFloat(lat)]
+            },
+            $maxDistance: parseInt(distance)
+          }
         }
-      }
-    });
+      });
 
-    res.json(properties);
+      res.json(nearbyProperties);
+    }
   } catch (err) {
     res.status(500).send(err.message);
   }

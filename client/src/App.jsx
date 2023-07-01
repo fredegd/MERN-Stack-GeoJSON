@@ -5,6 +5,7 @@ import Navigation from "./components/Navigation";
 import Landing from "./components/Landing";
 import Properties from "./components/Properties"
 import PropertyDetails from "./components/PropertyDetails";
+import NearbyPropertiesList from "./components/NearbyPropertiesList";
 import InputForm from "./components/InputForm";
 import "./App.css";
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/properties" element={<Properties />} />
           <Route path="/properties/:id" element={<PropertyDetails />} />
+          <Route path="/properties/map/near-by" element={<NearbyPropertiesList />} />
           <Route path="/properties/insert-property" element={<InputForm />} />
         </Routes>
       </div>
