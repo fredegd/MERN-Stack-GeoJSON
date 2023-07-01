@@ -4,14 +4,14 @@
   "description": "### GOALS - Creating a MERN stack CRUD application  - Exploring MongoDB’s geospatial queries - Using react-leaflet to create dynamic maps",
   "main": "index.js",
   "scripts": {
-    "dev":"nodemon index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cord": "^1.0.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "mongodb": "^5.6.0",
