@@ -18,7 +18,7 @@ const NearbyPropertiesList = () => {
       setLatitude(latitude);
       setLongitude(longitude);
       const url = `http://localhost:3000/properties/near-by?lng=${longitude}&lat=${latitude}&distance=10000`
-      console.log(url)
+      // console.log(url)
       const response = await axios.get(url, {
         params: {
           lng: longitude,
@@ -37,11 +37,6 @@ const NearbyPropertiesList = () => {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          console.log(position,"is the pos ")
-
-          // const { longitude, latitude } = position.coords;
-          // console.log( "long",longitude,"lati",latitude)
-          // resolve({  longitude,latitude });
           resolve(position)
         },
         (error) => {
