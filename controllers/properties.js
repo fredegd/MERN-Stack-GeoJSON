@@ -53,10 +53,35 @@ const getProperty = async (req, res) => {
     const property = await Property.findById(id).populate("owner", "name email phoneNumber");
     
     res.json(property);
-  } catch (error) {
-    res.status(500).send(error.message);
+  } catch (err) {
+    res.status(500).send(err.message);
   }
 };
+
+
+const getPropertiesNearBy = async (req, res) => {
+  try {
+    const { lng, lat, distance } = req.query;
+
+    const properties = await Property.find({
+      location: {
+        $near: {
+          $geometry: {
+            type: "Point",
+            coordinates: [parseFloat(lng), parseFloat(lat)]
+          },
+          $maxDistance: parseInt(distance)
+        }
+      }
+    });
+
+    res.json(properties);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+
 
 const updateProperty = async (req, res) => {
   try {
@@ -86,4 +111,4 @@ const deleteProperty = async (req, res) => {
 };
 
 
-module.exports = { createProperty, getProperties, getProperty, updateProperty,deleteProperty };
+module.exports = { createProperty, getProperties, getProperty,getPropertiesNearBy, updateProperty,deleteProperty };
