@@ -13,10 +13,10 @@ export default function PropertyDetails() {
     axios
       .get(`http://localhost:3000/properties/${id}`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setPropertyDetail(response.data);
         setOwnerDetail(response.data.owner);
-        console.log(ownerDetail)
+        // console.log(ownerDetail)
       })
       .catch((err) => console.error(err, "url not found"));
   }, []);

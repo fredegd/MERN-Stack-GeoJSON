@@ -62,7 +62,7 @@ const getProperty = async (req, res) => {
 const getPropertiesNearBy = async (req, res) => {
   try {
     const { lng, lat, distance } = req.query;
-
+// console.log(req.query)
     if (!lng || !lat || !distance) {
       const properties = await Property.find({});
       res.json(properties);
@@ -77,8 +77,9 @@ const getPropertiesNearBy = async (req, res) => {
             $maxDistance: parseInt(distance)
           }
         }
+        
       });
-
+      // console.log(nearbyProperties)
       res.json(nearbyProperties);
     }
   } catch (err) {

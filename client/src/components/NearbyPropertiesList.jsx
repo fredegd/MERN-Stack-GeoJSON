@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import MapElement from "./MapElement";
 
 const NearbyPropertiesList = () => {
   const [properties, setProperties] = useState([]);
-
+  const [longitude, setLongitude] = useState(null);
+  const [latitude, setLatitude] = useState(null);
+  
   useEffect(() => {
     fetchNearbyProperties();
   }, []);
 
   const fetchNearbyProperties = async () => {
     try {
-      const { latitude, longitude } = await getUserLocation();
-      const response = await axios.get("http://localhost:3000/properties/near-by", {
+      const position = await getUserLocation();
+      const { latitude, longitude } = position.coords;
+      setLatitude(latitude);
+      setLongitude(longitude);
+      const url = `http://localhost:3000/properties/near-by?lng=${longitude}&lat=${latitude}&distance=10000`
+      console.log(url)
+      const response = await axios.get(url, {
         params: {
-         
           lng: longitude,
           lat: latitude,
           distance: 10000, // 10000 means thousand meters
@@ -24,14 +31,18 @@ const NearbyPropertiesList = () => {
       console.error(error);
     }
   };
+  
 
   const getUserLocation = () => {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const { longitude, latitude } = position.coords;
-          console.log( "long",longitude,"lati",latitude)
-          resolve({  longitude,latitude });
+          console.log(position,"is the pos ")
+
+          // const { longitude, latitude } = position.coords;
+          // console.log( "long",longitude,"lati",latitude)
+          // resolve({  longitude,latitude });
+          resolve(position)
         },
         (error) => {
           reject(error);
@@ -57,6 +68,7 @@ const NearbyPropertiesList = () => {
           </div>
         ))}
       </div>
+      {latitude && longitude && <MapElement latitude={latitude} longitude={longitude} />}
     </div>
   );
 };
