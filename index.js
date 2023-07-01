@@ -8,6 +8,7 @@ const propertyRouter = require("./routes/properties")
 //
 const app = express();
 const PORT = process.allowedNodeEnvironmentFlags.PORT || 3000;
+app.use(cors());
 
 app.use(express.json());
 

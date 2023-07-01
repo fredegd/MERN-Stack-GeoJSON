@@ -48,7 +48,7 @@ const getProperty = async (req, res) => {
       params: { id },
     } = req;
 
-    const property = await Property.findById(id);
+    const property = await Property.findById(id).populate("owner", "name email phoneNumber");
     
     res.json(property);
   } catch (error) {
