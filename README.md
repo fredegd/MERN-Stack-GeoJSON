@@ -9,7 +9,7 @@
 This is a  real estate application where users can search for properties based on their desired location. Implement mongoose's geo location search to enable users to find properties within a specific area or proximity to certain landmarks.
 
 
-CRUD operation are possible:
+all kind of CRUD operation are possible: \n
 post "/" to create a new property
 get "/near-by" will return all the properties near by, by asking for the user browser geolocation.
 
