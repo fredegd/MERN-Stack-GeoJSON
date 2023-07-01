@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
   phoneNumber: { type: String, unique: true, required: true },
   isActive: { type: Boolean, default: true },
 });
-
 const User = mongoose.model("user",userSchema)
+// User.collection.createIndex({ location: '2dsphere' })
+
 module.exports = User;
