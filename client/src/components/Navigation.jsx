@@ -7,7 +7,9 @@ export default function Navigation() {
       <nav className="navbar">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/properties">Properties</NavLink>
-        <NavLink to="/properties/insert-property">Add&nbsp;Properties</NavLink>
+        <NavLink to="/properties/map/near-by">Properties&nbsp;Nearby</NavLink>
+        <NavLink to="/properties/insert-property">Add&nbsp;Property</NavLink>
+     
       </nav>
     </div>
   );

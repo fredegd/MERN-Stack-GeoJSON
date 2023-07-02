@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function MapElement({ latitude, longitude }) {
   const [properties, setProperties] = useState([]);
-  const [radius, setRadius] = useState(1000);
+  const [radius, setRadius] = useState(40000000);
 
   useEffect(() => {
     fetchNearbyProperties();
@@ -34,8 +34,11 @@ export default function MapElement({ latitude, longitude }) {
       <select value={radius} onChange={(e) => setRadius(e.target.value)}>
         <option value="500">500 meters</option>
         <option value="1000">1000 meters</option>
-        <option value="2000">2000 meters</option>
-        <option value="10000">10000 meters</option>
+        <option value="2000">2 Km</option>
+        <option value="10000">10 Km</option>
+        <option value="100000">100 Km</option>
+        <option value="1000000">1000 Km</option>
+        <option value="40000000">40000 Km</option>
       </select>
         <MapContainer
           center={[latitude, longitude]}
