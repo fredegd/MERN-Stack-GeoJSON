@@ -12,7 +12,7 @@ const createProperty = async (req, res) => {
       image,
       images,
       owner,
-      availability
+      availability,
     } = req.body;
 
     const property = await Property.create({
@@ -25,20 +25,19 @@ const createProperty = async (req, res) => {
       image,
       images,
       owner,
-      availability
+      availability,
     });
-    
+
     res.status(201).json(property);
   } catch (err) {
     res.status(500).send(err.message);
   }
 };
 
-
 const getPropertiesNearBy = async (req, res) => {
   try {
     const { lng, lat, distance } = req.query;
-  //    console.log(req.query)
+    //    console.log(req.query)
     if (!lng || !lat || !distance) {
       const properties = await Property.find({});
       res.json(properties);
@@ -48,12 +47,11 @@ const getPropertiesNearBy = async (req, res) => {
           $near: {
             $geometry: {
               type: "Point",
-              coordinates: [parseFloat(lng), parseFloat(lat)]
+              coordinates: [parseFloat(lng), parseFloat(lat)],
             },
-            $maxDistance: parseInt(distance)
-          }
-        }
-        
+            $maxDistance: parseInt(distance),
+          },
+        },
       });
       // console.log(nearbyProperties)
       res.json(nearbyProperties);
@@ -63,21 +61,22 @@ const getPropertiesNearBy = async (req, res) => {
   }
 };
 
-
 const getProperty = async (req, res) => {
   try {
     const {
       params: { id },
     } = req;
 
-    const property = await Property.findById(id).populate("owner", "name email phoneNumber");
-    
+    const property = await Property.findById(id).populate(
+      "owner",
+      "name email phoneNumber"
+    );
+
     res.json(property);
   } catch (err) {
     res.status(500).send(err.message);
   }
 };
-
 
 const getProperties = async (req, res) => {
   try {
@@ -88,9 +87,6 @@ const getProperties = async (req, res) => {
   }
 };
 
-
-
-
 const updateProperty = async (req, res) => {
   try {
     const {
@@ -98,7 +94,6 @@ const updateProperty = async (req, res) => {
       params: { id },
     } = req;
 
-    
     const property = await Property.findByIdAndUpdate(id, body, { new: true });
     res.json(property);
   } catch (error) {
@@ -118,5 +113,11 @@ const deleteProperty = async (req, res) => {
   }
 };
 
-
-module.exports = { createProperty, getPropertiesNearBy, getProperty, getProperties, updateProperty,deleteProperty };
+module.exports = {
+  createProperty,
+  getPropertiesNearBy,
+  getProperty,
+  getProperties,
+  updateProperty,
+  deleteProperty,
+};

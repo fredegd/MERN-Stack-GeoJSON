@@ -30,7 +30,7 @@ const getUser = async (req, res) => {
 
     const user = await User.findById(id);
     // const user = await User.findOne({_id: id});
-    
+
     res.json(user);
   } catch (error) {
     res.status(500).send(error.message);
@@ -44,7 +44,6 @@ const updateUser = async (req, res) => {
       params: { id },
     } = req;
 
-    
     const user = await User.findByIdAndUpdate(id, body, { new: true });
     res.json(user);
   } catch (error) {
