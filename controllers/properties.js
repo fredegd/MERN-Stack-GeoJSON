@@ -34,35 +34,11 @@ const createProperty = async (req, res) => {
   }
 };
 
-const getProperties = async (req, res) => {
-  try {
-    const properties = await Property.find({});
-    res.json(properties);
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-};
-
-
-const getProperty = async (req, res) => {
-  try {
-    const {
-      params: { id },
-    } = req;
-
-    const property = await Property.findById(id).populate("owner", "name email phoneNumber");
-    
-    res.json(property);
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-};
-
 
 const getPropertiesNearBy = async (req, res) => {
   try {
     const { lng, lat, distance } = req.query;
-// console.log(req.query)
+  //    console.log(req.query)
     if (!lng || !lat || !distance) {
       const properties = await Property.find({});
       res.json(properties);
@@ -86,6 +62,32 @@ const getPropertiesNearBy = async (req, res) => {
     res.status(500).send(err.message);
   }
 };
+
+
+const getProperty = async (req, res) => {
+  try {
+    const {
+      params: { id },
+    } = req;
+
+    const property = await Property.findById(id).populate("owner", "name email phoneNumber");
+    
+    res.json(property);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+
+const getProperties = async (req, res) => {
+  try {
+    const properties = await Property.find({});
+    res.json(properties);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
 
 
 
@@ -117,4 +119,4 @@ const deleteProperty = async (req, res) => {
 };
 
 
-module.exports = { createProperty, getProperties, getProperty,getPropertiesNearBy, updateProperty,deleteProperty };
+module.exports = { createProperty, getPropertiesNearBy, getProperty, getProperties, updateProperty,deleteProperty };

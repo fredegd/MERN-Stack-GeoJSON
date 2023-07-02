@@ -7,7 +7,7 @@ const userRouter = require("./routes/users")
 const propertyRouter = require("./routes/properties")
 //
 const app = express();
-const PORT = process.allowedNodeEnvironmentFlags.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 app.use(cors({
   origin: "http://localhost:5173"
 }));
