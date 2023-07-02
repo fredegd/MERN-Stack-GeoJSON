@@ -17,10 +17,16 @@ all kind of **CRUD** operation are possible within the server: .
 - put "/:d" will update the selected property
 - delete "/:d" will dlete the selected property
 
-in the frontend the user position is gotten from the browser and send it as a request in the query parameter.
-through this and a radius selection the user may find properties nearby.
+in the frontend the user position is taken from the browser and send it as a request in the query parameter.
+thank to this and a radius selection the user may find properties nearby.
 
-
+########
+a location index with value 2dsphere must be added to the Property model by commenting out the line:
+```
+Property.collection.createIndex({ location: '2dsphere' })
+````
+alternatively can be manually added in the Atlas Console.
+########
 
 
 
