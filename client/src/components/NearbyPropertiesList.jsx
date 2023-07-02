@@ -14,9 +14,10 @@ const NearbyPropertiesList = () => {
   const fetchNearbyProperties = async () => {
     try {
       const position = await getUserLocation();
-      const { latitude, longitude } = position.coords;
-      setLatitude(latitude);
+      const { longitude, latitude } = position.coords;
+     
       setLongitude(longitude);
+      setLatitude(latitude);
       const url = `http://localhost:3000/properties/near-by?lng=${longitude}&lat=${latitude}&distance=10000`
       // console.log(url)
       const response = await axios.get(url, {
@@ -63,7 +64,7 @@ const NearbyPropertiesList = () => {
           </div>
         ))}
       </div>
-      {latitude && longitude && <MapElement latitude={latitude} longitude={longitude} />}
+      {latitude && longitude && <MapElement longitude={longitude} latitude={latitude}  />}
     </div>
   );
 };

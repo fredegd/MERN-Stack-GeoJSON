@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function InputForm() {
   const navigate = useNavigate();
-  const [users, setUsers] = useState([]);
+  const [owners, setOwners] = useState([]);
 
   useEffect(() => {
     axios
@@ -15,7 +15,7 @@ export default function InputForm() {
         setUsers(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching users:", error);
+        console.error("Error fetching owners data:", error);
       });
   }, []);
 
@@ -58,7 +58,18 @@ export default function InputForm() {
       availability,
     };
 
-    console.log(propertyData);
+    // console.log(propertyData);
+
+    axios
+      .put(`http://localhost:3000/properties/${id}`, propertyData)
+      .then((response) => {
+        console.log("Added new item successfully:", response.data);
+        reset();
+        navigate(`/properties`);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
 
     axios
       .post("http://localhost:3000/properties", propertyData)
@@ -148,7 +159,7 @@ export default function InputForm() {
             {...register("owner", { required: true })}
           >
             <option key="0" value="">Select owner</option>
-            {users.map((user) => (
+            {owners.map((owner) => (
               <option key={user._id} value={user._id}>
                 {user.name}
               </option>

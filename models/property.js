@@ -35,5 +35,5 @@ const propertySchema = new mongoose.Schema({
 propertySchema.index({ location: "2dsphere" });
 
 const Property = mongoose.model("property", propertySchema);
-Property.collection.createIndex({ location: "2dsphere" });
+// Property.collection.createIndex({ location: "2dsphere" });
 module.exports = Property;

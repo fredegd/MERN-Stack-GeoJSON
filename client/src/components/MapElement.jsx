@@ -50,8 +50,8 @@ export default function MapElement({ latitude, longitude }) {
             <Marker
               key={property._id}
               position={[
-                property.location.coordinates[1],
                 property.location.coordinates[0],
+                property.location.coordinates[1],
               ]}
             >
               <Popup>
